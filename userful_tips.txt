@@ -1,0 +1,21 @@
+1.
+//ios sdk log没有设置的情况下
+xcode →  window → Devices →选中相关设备  →  选中相应应用 → 应用列表下方设置按键  → Download Container  → 已下载文件右键选择显示包内容 → AppData/Libary/Caches/agorasdk.log
+2.
+//Oppo R15 logcat 缓存区
+adb logcat -G 2m
+3.
+解析转义 json 是否正确 
+https://www.bejson.com
+4.
+ Log私有参数设置
+打开SDK log：
+OC:
+[mRtcEngine setParameters:@"{\"rtc.log_filter\":65535}"]; 
+[mRtcEngine setParameters:@"{\"rtc.log_filter\":32783}"]; 
+[mRtcEngine setLogFile:path]; 
+
+Android:
+mRtcEngine.setParameters("{\"rtc.log_filter\":65535}");
+mRtcEngine.setParameters("{\"rtc.log_filter\":32783}");
+mRtcEngine.setLogFile("/sdcard/agorasdk.log") ;
