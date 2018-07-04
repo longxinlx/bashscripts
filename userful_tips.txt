@@ -8,7 +8,7 @@ adb logcat -G 2m
 解析转义 json 是否正确 
 https://www.bejson.com
 4.
- Log私有参数设置
+Log私有参数设置
 打开SDK log：
 OC:
 [mRtcEngine setParameters:@"{\"rtc.log_filter\":65535}"]; 
@@ -19,3 +19,6 @@ Android:
 mRtcEngine.setParameters("{\"rtc.log_filter\":65535}");
 mRtcEngine.setParameters("{\"rtc.log_filter\":32783}");
 mRtcEngine.setLogFile("/sdcard/agorasdk.log") ;
+5.
+Q:如果客户推的流是264*264 但是旁路的transcoding的size是360*640 竖屏, user的frame是0,0,360,640 这个服务端是怎么给做裁剪的?
+A:当前推流的裁剪都是按照hidden方式，就是先按目标分辨率的宽高比例去裁原图，然后再等比例缩放到目标分辨率。
