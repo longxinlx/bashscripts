@@ -22,3 +22,13 @@ mRtcEngine.setLogFile("/sdcard/agorasdk.log") ;
 5.
 Q:如果客户推的流是264*264 但是旁路的transcoding的size是360*640 竖屏, user的frame是0,0,360,640 这个服务端是怎么给做裁剪的?
 A:当前推流的裁剪都是按照hidden方式，就是先按目标分辨率的宽高比例去裁原图，然后再等比例缩放到目标分辨率。
+6.
+推流机器人使用简单说明：
+1) config.json脚本修改：
+   修改config.json 中global_settings的key，channel_name： 分别改成自己的appid，想要录制的channel；
+   默认是通信模式，如果想要改成直播模式，则还需要修改global_settings中的mode，根据comment进行修改；
+2)start.sh 脚本修改：
+   修改#9行的channel_name，改成想要录制的channel
+3)运行方式：
+   启动：./start.sh 0      起 1 路推流机器人在设定的频道内；./start.sh 1    起 2 路推流器人在设定的频道内，以此类推；
+   停止：./robots_stop.sh  停止所以推流机器人
