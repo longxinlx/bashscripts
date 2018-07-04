@@ -1,12 +1,15 @@
 1.
 //ios sdk log没有设置的情况下
 xcode →  window → Devices →选中相关设备  →  选中相应应用 → 应用列表下方设置按键  → Download Container  → 已下载文件右键选择显示包内容 → AppData/Libary/Caches/agorasdk.log
+
 2.
 //Oppo R15 logcat 缓存区
 adb logcat -G 2m
+
 3.
 解析转义 json 是否正确 
 https://www.bejson.com
+
 4.
 Log私有参数设置
 打开SDK log：
@@ -19,9 +22,64 @@ Android:
 mRtcEngine.setParameters("{\"rtc.log_filter\":65535}");
 mRtcEngine.setParameters("{\"rtc.log_filter\":32783}");
 mRtcEngine.setLogFile("/sdcard/agorasdk.log") ;
+
+Windows:
+OpenLive设置私有参数，写入SDKLog到本地写法
+
+diff --git a/OpenLive/AgoraObject.cpp b/OpenLive/AgoraObject.cpp
+index 2e604d3..46b3b31 100644
+--- a/OpenLive/AgoraObject.cpp
++++ b/OpenLive/AgoraObject.cpp
+@@ -443,6 +443,20 @@ BOOL CAgoraObject::EnableLoopBack(BOOL bEnable)
+        return nRet == 0 ? TRUE : FALSE;
+ }
+
++BOOL CAgoraObject::EnableAPM(BOOL bEnable)
++{
++       int nRet = 0;
++
++       AParameter apm(*m_lpAgoraEngine);
++
++       if (bEnable)
++               nRet = apm->setParameters("{\"che.audio.bypass.apm\":true}");
++       else
++               nRet = apm->setParameters("{\"che.audio.bypass.apm\":false}");
++
++       return nRet == 0 ? TRUE : FALSE;
++}
++
+ BOOL CAgoraObject::IsLoopBackEnabled()
+ {
+        return m_bLoopBack;
+diff --git a/OpenLive/AgoraObject.h b/OpenLive/AgoraObject.h
+index ed47b07..da0cb5c 100644
+--- a/OpenLive/AgoraObject.h
++++ b/OpenLive/AgoraObject.h
+@@ -94,6 +94,8 @@ public:
+        BOOL EnableLoopBack(BOOL bEnable = TRUE);
+        BOOL IsLoopBackEnabled();
+
++  BOOL EnableAPM(BOOL bEnable = TRUE);
++
+        BOOL SetChannelProfile(BOOL bBroadcastMode);
+        BOOL IsBroadcastMode();
+
+diff --git a/OpenLive/OpenLiveDlg.cpp b/OpenLive/OpenLiveDlg.cpp
+index 48a0bc3..a5adb7e 100644
+--- a/OpenLive/OpenLiveDlg.cpp
++++ b/OpenLive/OpenLiveDlg.cpp
+@@ -354,7 +354,7 @@ LRESULT COpenLiveDlg::OnJoinChannel(WPARAM wParam, LPARAM lParam)
+        m_dlgVideo.SetWindowText(strChannelName);
+        lpRtcEngine->setupLocalVideo(vc);
+        lpRtcEngine->startPreview();
+
++        lpAgoraObject->SetLogFilter(LOG_FILTER_TYPE.LOG_FILTER_INFO,"D:\\test\\agorasdk.log");
+        lpAgoraObject->JoinChannel(strChannelName);
+
 5.
 Q:如果客户推的流是264*264 但是旁路的transcoding的size是360*640 竖屏, user的frame是0,0,360,640 这个服务端是怎么给做裁剪的?
 A:当前推流的裁剪都是按照hidden方式，就是先按目标分辨率的宽高比例去裁原图，然后再等比例缩放到目标分辨率。
+
 6.
 推流机器人使用简单说明：
 1) config.json脚本修改：
@@ -32,10 +90,20 @@ A:当前推流的裁剪都是按照hidden方式，就是先按目标分辨率的
 3)运行方式：
    启动：./start.sh 0      起 1 路推流机器人在设定的频道内；./start.sh 1    起 2 路推流器人在设定的频道内，以此类推；
    停止：./robots_stop.sh  停止所以推流机器人
+
 7.
 Q:聊天室麦下观众拉的是单流吗？比如一个主持8个嘉宾,连麦的混音是在服务器端做的还是拉下来再混的?
 A:服务器端只是负责传输，拉下来混的
+
 8.
 Q：声网性能消耗这块有测试过吗？有没有一个IOS版本SDK性能消耗指标
 A：IOS SDK 耗电量，我们内部基于一些比较老的机器（iphone6），测试的数据耗电占比（6%，30分钟直播纯音频）。
 补充：耗电6%，不是一个可度量的单位，和电池容量有关，同一款手机，电池容量也有高达20%的差距，误差会比较大。我们的测试时基于demo测试，demo部分含有一点业务代码，SDK实际的耗电应略小于 6%
+
+9.
+WebSDK 与IOS 端互通注意：
+1）ios端需要调用enableWebSdkInteroperability 接口
+2）websdk createClient的时候可以提供很多模式，不要用webonly模式（比如用interop就行)
+
+10.
+channelInviteRefuse信令参数ChannelID,account两个参数用来确定拒绝的对象，uid参数废弃
