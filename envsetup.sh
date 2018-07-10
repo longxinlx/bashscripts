@@ -17,7 +17,7 @@ echo -e "\033[31m grep 结束------------------------------------------华丽的
 function cgrep()
 {
 echo -e "\033[31m grep 开始------------------------------------------华丽的分割线------------------------------------- \033[0m" 
-    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) \
+    find . -name .repo -prune -o -name .git -prune -o -name out -prune -o -type f \( -name '*.c' -o -name '*.cc' -o -name '*.cpp' -o -name '*.m' -o -name '*.mm'  -o -name '*.h' -o -name '*.hpp' \) \
         -exec grep --color -n "$@" {} +
 echo -e "\033[31m grep 结束------------------------------------------华丽的分割线------------------------------------- \033[0m"
 }

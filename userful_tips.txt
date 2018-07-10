@@ -111,3 +111,15 @@ channelInviteRefuse信令参数ChannelID,account两个参数用来确定拒绝�
 11.
 Q:app里的音视频等，播放不需要蓝牙权限即可走蓝牙耳机播放，系统控制路由；进入我们的声网频道后，需要添加蓝牙权限才可以走蓝牙耳机，他们考虑到google play上如果添加这个权限，不能静默自动升级，所以对于添加权限比较慎重，想不添加蓝牙权限也能走蓝牙耳机。所以想问下，这个问题有解么？
 A:app 蓝牙不需要权限是因为A2DP 是系统默认行为。 要使用蓝牙SCO通话就必须添加蓝牙权限
+
+12.
+Q:H5直接依赖声网web sdk开发1对1通话的例子
+A:例子暂时我们没有，我们的客户之前没有使用过这种搭配方式（app webview+ agora websdk ）。
+
+因为通常来说，移动端直接集成natvie端SDK，稳定体验好。通过WebView加载webSDK的方式理论上说体验肯定是输给native端的。
+
+至于刚刚技术支持同学提及ios 不支持，是跑不通，这里之前有过失败的采坑经验。 Android webview 应该是跑的通的。但是就基于Android 的平台碎片化，webview 内核 webkit的兼容性，预估计坑不会少。
+
+之前有客户试过，有问题，我们推荐用rect native 或者 apicloud 之类的方案,实际上IOS端还是native sdk实现的
+
+ios上的几种webview对象uiwebview以及safariwebview都无法使用getusermedia访问设备的api，apple隐藏了，不排除未来会支持，目前ios上如果app要支持，只有使用PWA，PWA本质上是网页应用
