@@ -50,3 +50,15 @@ nm -gU libs/AgoraRtcEngineKit.framework/AgoraRtcEngineKit | grep _ff_
 linux  sed 提取介于某个区间的几行文字
 # 比如从第3行到第10行
 sed -n '3,10p' myfile > newfile
+
+12.
+ffpmeg 分割超大视频文件，建议先对半分为两个，再两个继续对半分，sample命令：
+
+ffmpeg -ss 00:00:00 -t 00:18:00 -i IMG_1427.MOV -vcodec copy -acodec copy IMG_1427_2.MOV
+ffmpeg -ss 00:18:01 -t 00:36:39 -i IMG_1427.MOV -vcodec copy -acodec copy IMG_1427_4.MOV
+
+ffmpeg -ss 00:00:00 -t 00:09:00 -i IMG_1427_2.MOV -vcodec copy -acodec copy IMG_1427_2_1.MOV
+ffmpeg -ss 00:09:01 -t 00:18:00 -i IMG_1427_2.MOV -vcodec copy -acodec copy IMG_1427_2_2.MOV
+
+ffmpeg -ss 00:00:00 -t 00:09:00 -i IMG_1427_4.MOV -vcodec copy -acodec copy IMG_1427_4_1.MOV
+ffmpeg -ss 00:09:01 -t 00:18:39 -i IMG_1427_4.MOV -vcodec copy -acodec copy IMG_1427_4_2.MOV
