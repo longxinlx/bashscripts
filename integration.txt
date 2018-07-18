@@ -1,0 +1,37 @@
+1. 
+录制demo启动
+1）build.gradle 是打包jar包的工具;
+2）agora.jar.tar.gz 是打包好的jar包;
+3）librecording.so.tar.gz是jni so包;
+4）test_jar_demo.zip 是调用jar的test demo；
+5）Agora_RecordingXXX_Full.tar.gz 是recording SDK(包含jni和使用native method的java demo);
+
+注意服务器能连上互联网，注意防火墙，不要把文档里面的几个端口给屏蔽了
+确保UDP服务器端口已打开：双向4001-4030 ， 1080， 8000以及25000，以便与Agora服务器通信
+
+设置下 vm option的-Djava.library.path，指定到so的路径
+
+jni层出现异常的话，jvm一般就会crash，生成hs_err_pidxxx.log
+
+
+2.
+录制遇到的问题：
+Failed to call execvp(/data/local/tps-agora/libs/AgoraCoreService): Permission denied
+
+没有权限，chmod 750 AgoraCoreService
+
+3.
+推流机器人使用简单说明：
+1）config.json脚本修改：
+   修改config.json 中global_settings的key，channel_name： 分别改成自己的appid，想要录制的channel；
+   默认是通信模式，如果想要改成直播模式，则还需要修改global_settings中的mode，根据comment进行修改；
+2）start.sh 脚本修改：
+   修改#9行的channel_name，改成想要录制的channel
+3）运行方式：
+   启动：./start.sh 0      起 1 路推流机器人在设定的频道内；./start.sh 1    起 2 路推流器人在设定的频道内，以此类推；
+   停止：./robots_stop.sh  停止所以推流机器人
+
+问题：推流机器人  修改 start.sh 里面的 channelName， 是包含后面的$i 还是只要替换前面的channelName？
+回答：$i  是循环变量的值；
+比如./start.sh 4,那么就会有channelname0,channelname1,channelname2,channelname3
+shart.sh 4  是建立了四个直播频道，每个频道内一个直播
