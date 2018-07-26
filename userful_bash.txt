@@ -65,3 +65,6 @@ ffmpeg -ss 00:09:01 -t 00:18:39 -i IMG_1427_4.MOV -vcodec copy -acodec copy IMG_
 
 13.
 /Applications/VLC.app/Contents/MacOS/VLC --demux=rawaud --rawaud-channels 1 --rawaud-samplerate 48000 near_out.pcm
+
+14.
+ffplay -f rawvideo -video_size 360x640 a.yuv
