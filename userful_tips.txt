@@ -173,3 +173,8 @@ ios上的几种webview对象uiwebview以及safariwebview都无法使用getuserme
 14.
 Q:网宿NGB调度ip地址支持设置给声网旁路推流？
 A:网宿NGB调度到的ip地址更适合客户端推流方式，应该这个ip是根据客户端所在网络调度到的最优ip，如果使用我们服务端推流，这个ip并不一定最优，更坏的情况如果我们服务器端和这个ip是跨网的，就有很大概率推流失败。所以建议给我们服务器端的推流地址使用域名，我们服务器端会进行域名解析，找到最优ip来推流
+
+15.
+Q:NDK jni打印int值
+A:#include <android/log.h>
+__android_log_print(ANDROID_LOG_DEBUG,"tagname","videoFrame.yStride=%d",videoFrame.yStride);
