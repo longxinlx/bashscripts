@@ -68,3 +68,13 @@ ffmpeg -ss 00:09:01 -t 00:18:39 -i IMG_1427_4.MOV -vcodec copy -acodec copy IMG_
 
 14.
 ffplay -f rawvideo -video_size 360x640 a.yuv
+
+15.
+#挂在共享目录SharedUbunu 到 指定目录下
+mount -t vboxsf SharedUbuntu /mnt/UbuntuShare
+#虚拟机共享目录写入权限
+sudo usermod -aG vboxsf $(whoami)
+
+16.
+#虚拟机配置端口转发 ssh -p 端口号 用户名@host ip
+ssh -p 12100 longxin@127.0.0.1
