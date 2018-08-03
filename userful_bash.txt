@@ -87,3 +87,9 @@ export PATH=$JAVA_HOME/bin:$JRE_HOME/bin:$PATH
 
 18.
 git config --global core.editor vim
+
+19.
+#ssh-server config
+sudo apt-get install openssh-server
+sudo systemctl status ssh.service
+sudo gedit /etc/ssh/sshd_config
