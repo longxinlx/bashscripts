@@ -178,3 +178,12 @@ A:网宿NGB调度到的ip地址更适合客户端推流方式，应该这个ip�
 Q:NDK jni打印int值
 A:#include <android/log.h>
 __android_log_print(ANDROID_LOG_DEBUG,"tagname","videoFrame.yStride=%d",videoFrame.yStride);
+
+16.
+Q:reportAudioVolumeIndicationOfSpeakers回调,在使用过程中，如果mutelocal，再突然断网，对端行为？
+A:muteLocal不断网，对端能收到音量回调+uid，但是如果断网了，因为服务器端需要超过15秒踢掉当前主播，对端收到的回调数据在15秒内是不准确的，很可能是上次的缓存volume值，非0.
+
+17.
+Q:[rp]{"che.audio.record.signal.volume":0}]
+对应上层Api调用为adjustRecordingSignalVolume（0）, argus上会体现nearout 突然降到0 ，但是nearin正常
+A:通常应该是App层mic采集正常，但是api把信号的增益设置成0了，之后没有声音了。编码器输出就没声音了。
