@@ -93,3 +93,8 @@ git config --global core.editor vim
 sudo apt-get install openssh-server
 sudo systemctl status ssh.service
 sudo gedit /etc/ssh/sshd_config
+
+20.
+#模拟http post 请求,踢人 --user 传入的是username:passwd
+sample:
+curl -H "Content-Type:application/json" -X POST --data '{"appid":"c7ad348686e944d5b24d5259f7e2edd9","cname":"qaz","uid":"11112223","time":"1"}' --user ffed8372861941258877ed540cf4a28b:8ef540a6895540388ed3b996f343e955 http://api.agora.io/dev/v1/kicking-rule
