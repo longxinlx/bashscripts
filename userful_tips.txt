@@ -187,3 +187,7 @@ A:muteLocal不断网，对端能收到音量回调+uid，但是如果断网了�
 Q:[rp]{"che.audio.record.signal.volume":0}]
 对应上层Api调用为adjustRecordingSignalVolume（0）, argus上会体现nearout 突然降到0 ，但是nearin正常
 A:通常应该是App层mic采集正常，但是api把信号的增益设置成0了，之后没有声音了。编码器输出就没声音了。
+
+18.
+Q:uid重复，频道内会出现不同的端互踢的现象
+A:是的，严格要求不能uid重复，否则会出现卡顿，变声等异常现象。
