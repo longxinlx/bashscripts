@@ -31,6 +31,8 @@ ffmpeg -ss 00:00:00 -t 00:01:16 -y -i VID_20180201_195216.3gp -vcodec copy -acod
 ffmpeg -i sufang3.3gp -b:a 256k -vn -f mp3 sufang3.mp3
 //指定分辨率转3gp视频为gif
 ffmpeg -i VID_20180202_194328.3gp -s 540x540 hml_540_540.gif
+//提取aac
+ffmpeg -i IMG_3166.MOV -vn -acodec copy IMG_3166.aac
 
 8.
 Premium logcat 查看
