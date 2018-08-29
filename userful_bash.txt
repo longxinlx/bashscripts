@@ -104,3 +104,6 @@ curl -H "Content-Type:application/json" -X POST --data '{"appid":"c7ad348686e944
 21.
 //指定设备安装apk
 adb -s 5ed2cc36  install app/build/outputs/apk/app-debug.apk
+
+22.
+g++ -std=c++11 your_file.cpp -o your_program
