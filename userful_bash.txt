@@ -107,3 +107,7 @@ adb -s 5ed2cc36  install app/build/outputs/apk/app-debug.apk
 
 22.
 g++ -std=c++11 your_file.cpp -o your_program
+
+23.
+//查看所有安装的包名以及对应apk路径
+adb shell pm list packages -f
