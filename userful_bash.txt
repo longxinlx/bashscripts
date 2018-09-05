@@ -111,3 +111,8 @@ g++ -std=c++11 your_file.cpp -o your_program
 23.
 //查看所有安装的包名以及对应apk路径
 adb shell pm list packages -f
+
+24.
+grep -a -n "\[rp\]" premium.log --color=auto > premium.log
+grep -a -n "\[rp\]" premium.log --color=auto | awk -F";" '{print $2}' > premium_rp_awk.log
+grep -a -n "\[rp\]" premium.log --color=auto | awk -F"rp] " '{print $2}' > premium_no_rp_awk.log
