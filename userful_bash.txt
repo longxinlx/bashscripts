@@ -116,3 +116,7 @@ adb shell pm list packages -f
 grep -a -n "\[rp\]" premium.log --color=auto > premium.log
 grep -a -n "\[rp\]" premium.log --color=auto | awk -F";" '{print $2}' > premium_rp_awk.log
 grep -a -n "\[rp\]" premium.log --color=auto | awk -F"rp] " '{print $2}' > premium_no_rp_awk.log
+
+25.
+FFplay播放PCM
+ffplay record.pcm -f s16le -channels 1 -ar 48000
