@@ -120,3 +120,11 @@ grep -a -n "\[rp\]" premium.log --color=auto | awk -F"rp] " '{print $2}' > premi
 25.
 FFplay播放PCM
 ffplay record.pcm -f s16le -channels 1 -ar 48000
+
+26.
+#统计当前目录下所有文件个数，包括子目录
+ls -lR | grep "^-" | wc -l
+#统计当前目录下的文件个数，不包括子目录
+ls -l | grep "^-" | wc -l
+#find 当前目录指定类型文件，并复制到指定目录
+find . -name '*.mp3' -exec cp {} ~/Downloads/tmp/ \;
