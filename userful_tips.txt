@@ -199,3 +199,15 @@ A:并不是，下降到原来的2/3，帧率下降，每一帧之间间距变大
 20.
 Q: 同一个编码器，QP值越大画质越好?
 A：No, QP为0 ，代表原图，没有编码损失，QP越大画质越差。不同编码器不可比
+
+21.
+Q:关于变声如何恢复原音?
+A:setLocalVoicePitch 文档写默认值为 1.0
+
+setLocalVoiceEqualization(int bandFrequency, int bandGain);   10组参数，默认值 0
+setLocalVoiceReverb(int reverbKey, int value) ；5组  reverbKey ， 默认值  0
+
+
+注意：
+setLocalVoiceEqualization 要针对所有设置过的 BandFrequency，都要重置一次
+setLocalVoiceReverb要针对所有设置过的reverbKey ，都要重置一次
