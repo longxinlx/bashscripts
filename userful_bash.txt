@@ -128,3 +128,7 @@ ls -lR | grep "^-" | wc -l
 ls -l | grep "^-" | wc -l
 #find 当前目录指定类型文件，并复制到指定目录
 find . -name '*.mp3' -exec cp {} ~/Downloads/tmp/ \;
+
+27.
+#播放h264码流文件
+ffplay -stats -f h264 preview.h264
