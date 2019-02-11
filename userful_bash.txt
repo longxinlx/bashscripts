@@ -137,3 +137,7 @@ ffplay -stats -f h264 preview.h264
 #查看ios/mac 静态库架构
 lipo -info FFmpeg-iOS/lib/libavcodec.a
 Architectures in the fat file: FFmpeg-iOS/lib/libavcodec.a are: i386 armv7 x86_64 arm64
+
+29.
+#删除指定目录下所有mkv 文件
+find . -type f -name '*.mkv' -exec rm -rf {} \;
