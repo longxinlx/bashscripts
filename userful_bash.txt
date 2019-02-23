@@ -141,3 +141,10 @@ Architectures in the fat file: FFmpeg-iOS/lib/libavcodec.a are: i386 armv7 x86_6
 29.
 #删除指定目录下所有mkv 文件
 find . -type f -name '*.mkv' -exec rm -rf {} \;
+
+30.
+#查找当前目录下的所有*.doc文件并将所有结果复制到 /tmp/doc 目录下
+find . -name "*.doc" -type f -exec cp {} /tmp/doc \;
+查找当前目录下的所有*.doc目录并将所有结果复制到 /tmp/doc 目录下
+find . -name "*.doc" -type d -exec cp {} /tmp/doc \;
+
