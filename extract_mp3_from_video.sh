@@ -9,7 +9,7 @@ do
     extension="${filename##*.}"
     filename="${filename%.*}"
 if [ "$extension" == "flv" -o "$extension" == "mp4" ] ; then
-   /Users/yiming/longxinlx/ffmpeg-20200504-5767a2e-macos64-static/bin/ffmpeg -i $fullname -f mp3 -vn $filename".mp3"
+       /Users/yiming/longxinlx/ffmpeg/bin/ffmpeg -i $fullname -f mp3 -vn $filename".mp3"
 else
     echo "不是视频文件."
 fi
